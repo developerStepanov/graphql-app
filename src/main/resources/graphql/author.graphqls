@@ -1,0 +1,9 @@
+type Author {
+	id: ID!
+	name: String!
+	books: [Book]!
+}
+
+extend type Mutation {
+	saveAuthor(name: String!, titles: [String]!): Author!
+}
