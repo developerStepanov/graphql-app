@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,8 @@ import com.stepanov.graphql.repository.BookRepository;
 public class Mutation implements GraphQLMutationResolver {
 	private AuthorRepository authorRepository;
 	private BookRepository bookRepository;
+	
+	private final Logger logger = LoggerFactory.getLogger(Mutation.class);
 	
 	@Autowired
 	public Mutation(AuthorRepository authorRepository, BookRepository bookRepository) {
@@ -35,6 +39,8 @@ public class Mutation implements GraphQLMutationResolver {
 		author.setBooks(books);
 		
 		authorRepository.save(author);
+		
+		logger.info("Success. Save!");
 		return author;
 	}
 	
@@ -49,6 +55,8 @@ public class Mutation implements GraphQLMutationResolver {
 		book.setAuthors(authors);
 		
 		bookRepository.save(book);
+		
+		logger.info("Success. Save!");
 		return book;
 	}
 }
